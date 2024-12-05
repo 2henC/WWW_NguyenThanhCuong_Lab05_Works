@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/profile-candidate.css}">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <h1>Hồ sơ cá nhân</h1>
+
+    <div class="action-bar">
+        <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
+        <div>
+            <a href="/candidate/editProfile" class="edit-profile-btn">Chỉnh sửa hồ sơ</a>
+            <a th:href="@{/candidate/manageSkills}" class="manage-skills-btn">Quản lý kỹ năng</a>
+            <a th:href="@{/candidate/manageExperience}" class="manage-experience-btn">Quản lý kinh nghiệm</a>
+        </div>
+    </div>
+
+
+    <div class="candidate-info">
+        <h2 th:text="${user.fullName}">user Name</h2>
+        <p><strong>Email:</strong> <span th:text="${user.email}">user@example.com</span></p>
+        <p><strong>Phone:</strong> <span th:text="${user.phone}">123-456-7890</span></p>
+       <p><strong>Address:</strong> <span th:text="${ user.address.number + ',  ' + user.address.street + ',  ' + user.address.city + ',  ' + user.address.country.name}">123 Main St, City, Country</span></p>
+    </div>
+
+    <div class="candidate-experience">
+        <h3>Experience</h3>
+        <ul>
+            <li th:each="experience : ${experiences}">
+                <p><strong>Công ty:</strong> <span th:text="${experience.company.companyName}">Company Name</span></p>
+                <p><strong>Vai trò:</strong> <span th:text="${experience.role}">Role</span></p>
+                <p><strong>Từ ngày:</strong> <span th:text="${experience.fromDate}">FromDate</span></p>
+                <p><strong>Đến ngày:</strong> <span th:text="${experience.toDate}">ToDate</span></p>
+                <p><strong>Mô tả công việc:</strong> <span th:text="${experience.workDescription}">WorkDescription</span></p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="candidate-skills">
+        <h3>Skills</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Tên kỹ năng</th>
+                <th>Loại kỹ năng</th>
+                <th>Cấp độ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="candidateSkill : ${candidateSkills}">
+                <td th:text="${candidateSkill.skill.skillName}">Skill Name</td>
+                <td th:text="${candidateSkill.skill.skillType.toString()}">Skill Type</td>
+                <td th:text="${candidateSkill.skillLevel}">Skill Level</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    div.inline {
+        color: black;
+        float: left;
+        padding: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    div.inline a.active {
+        background-color: red;
+        color: white;
+        border: 1px solid darkred;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Candidates</title>
+</head>
+<body>
+<h1>Candidate List with Pagination</h1>
+<table align="center" width="80%" border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>DOB</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th><a href="/candidate/addCandidate">Add New Candidate</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="candidate : ${candidatePage.content}">
+        <td th:text="${candidate.candidateId}"></td>
+        <td th:text="${candidate.fullName}"></td>
+        <td th:text="${candidate.dob}"></td>
+        <td th:text="${candidate.email}"></td>
+        <td th:text="${candidate.address.number + ', ' + candidate.address.street + ', ' + candidate.address.city + ', ' + candidate.address.country.name}"></td>
+        <td th:text="${candidate.phone}"></td>
+        <td><a th:href="@{'/candidate/editCandidate/' + ${candidate.candidateId}}">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="inline" th:if="${candidatePage.totalPages > 1}">
+    <a th:each="pageNumber : ${pageNumbers}"
+       th:href="@{/candidate/listCandidatePage(size=${candidatePage.size}, page=${pageNumber - 1})}"
+       th:text="${pageNumber}"
+       th:classappend="${pageNumber == candidatePage.number + 1} ? 'active' : ''"></a>
+</div>
+</body>
+</html>

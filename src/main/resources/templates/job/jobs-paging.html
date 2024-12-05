@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Portal</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/jobs-paging.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+
+    <h1 th:text="${fullJobs != null ? 'Danh sách công việc' : 'Quản lý các bài đăng tuyển'}"></h1>
+
+    <!-- Action Bar -->
+    <div class="action-bar" th:if="${session.user != null}">
+        <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
+        <div>
+        <span th:if="${session.loginType == 'employer'}">
+        <a th:href="@{/job/manageJob}" class="manage-job-btn">Quản lý bài đăng</a>
+        <a th:href="@{/job/addJob}" class="create-job-btn">+ Tạo mới công việc</a>
+    </span>
+            <span th:if="${session.loginType == 'candidate'}">
+        <a th:href="@{/job/suitableJob}" class="find-suitableJob-btn">Xem các công việc phù hợp</a>
+        <a th:href="@{/candidate/manageProfile}" class="manage-profile-btn">Quản lý hồ sơ</a>
+<!--        <a th:href="@{/candidate/manageSkills}" class="manage-skills-btn">Quản lý kỹ năng</a>-->
+<!--        <a th:href="@{/candidate/manageExperience}" class="manage-experience-btn">Quản lý kinh nghiệm</a>-->
+    </span>
+        </div>
+    </div>
+
+    <!-- Job Cards -->
+    <div class="job-list">
+        <div th:each="job : ${fullJobs != null ? fullJobs.content : managedJobs.content}" class="job-card">
+            <div class="job-header">
+                <h2 th:text="${job.jobName}">Tên công việc</h2>
+                <span class="company-name" th:text="${job.company.companyName}">Tên công ty</span>
+            </div>
+            <p class="job-description" th:text="${job.jobDescription}">Mô tả công việc</p>
+            <div class="skills">
+                <strong>Kỹ năng yêu cầu:</strong>
+                <ul>
+                    <li th:each="jobSkill : ${job.jobSkills}" th:text="${jobSkill.skill.skillName}">Kỹ năng</li>
+                </ul>
+            </div>
+            <!-- Action Buttons -->
+            <div class="job-actions">
+                <span th:if="${session.user != null and session.loginType != 'employer'}">
+                    <a href="#" class="apply-btn">Ứng tuyển</a>
+                </span>
+                <span th:if="${session.user != null and session.loginType == 'employer' and managedJobs != null}">
+                   <a th:href="@{/candidate/suitableCandidate(jobId=${job.jobId})}" class="find-suitableCandidate-btn">Tìm ứng viên phù hợp</a>
+                    <a th:href="@{/job/edit(id=${job.jobId})}" class="edit-btn">Cập nhật</a>
+                    <a th:href="@{/job/delete(id=${job.jobId})}" class="delete-btn"
+                       onclick="return confirm('Bạn có chắc chắn muốn xóa công việc này?')">Xóa</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <ul>
+            <li th:each="pageNum : ${pageNumbers}">
+                <a th:href="@{/job/listJobPage(page=${pageNum})}" th:text="${pageNum}">Số trang</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.header-container {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #333;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    box-sizing: border-box;
+    margin: 20px auto;
+}
+
+.form-add-exp {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group-exp {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group-exp h3 {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.form-group-exp label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group-exp input[type="text"],
+.form-group-exp input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group-exp textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.form-group-exp textarea:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.form-date {
+    display: flex;
+    gap: 20px;
+}
+
+.form-date div {
+    flex: 1;
+}
+
+.form-add-exp button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-add-exp button:hover {
+    background-color: #45a049;
+}
+
+.add-exp-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

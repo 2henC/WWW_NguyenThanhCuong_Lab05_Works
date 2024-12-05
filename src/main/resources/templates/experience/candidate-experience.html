@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Your Experiences</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/candidate-experience.css}">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <h1>Quản lý kinh nghiệm cá nhân</h1>
+    <div class="action-bar">
+        <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
+        <a href="/candidate/addExperience" class="add-experience-btn">Thêm kinh nghiệm mới</a>
+    </div>
+    <div class="exp-cards">
+        <div class="exp-card" th:each="experience: ${experiencePage}">
+            <div class="exp-header">
+                <h2 th:text="${experience.role}">Role name</h2>
+                <p class="company-name" th:text="${experience.company.companyName}">Company name</p>
+            </div>
+            <p><strong>Từ ngày:</strong> <span th:text="${experience.fromDate}">Start date</span></p>
+            <p><strong>Đến ngày:</strong> <span th:text="${experience.toDate}">End date</span></p>
+            <p><strong>Mô tả công việc:</strong> <span th:text="${experience.workDescription}">Word description</span></p>
+            <div class="exp-actions">
+                <a href="#" class="edit-exp-btn">Cập nhật</a>
+                <a href="#" class="delete-exp-btn">Xóa</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <ul>
+            <li th:each="pageNum : ${pageNumbers}">
+                <a th:href="@{/candidate/manageExperience(page=${pageNum})}" th:text="${pageNum}">Số trang</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

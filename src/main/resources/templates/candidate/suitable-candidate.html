@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Suitable Candidate</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/suitable-candidate.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+
+    <h1>Danh sách các ứng viên phù hợp với công việc</h1>
+
+    <div class="action-bar">
+        <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
+    </div>
+
+    <div class="job-info">
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 16px">
+            <div class="job-label">Job Name:</div>
+            <div th:text="${job.jobName}" class="job-name">Tên công việc</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <div class="job-label">Job Description:</div>
+            <div th:text="${job.jobDescription}" class="job-description">Mô tả công việc</div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center">
+            <strong>Kỹ năng yêu cầu:</strong>
+            <ul>
+                <li th:each="jobSkill : ${job.jobSkills}" th:text="${jobSkill.skill.skillName}">Kỹ năng</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="candidate-list">
+        <div class="candidate-card" th:each="candidate: ${suitableCandidates}">
+            <div>
+                <div class="candidate-header">
+                    <h2 th:text="${candidate.fullName}">Tên ứng viên</h2>
+                    <p><strong>Email:</strong> <span th:text="${candidate.email}">Email</span></p>
+                    <p><strong>Phone:</strong> <span th:text="${candidate.phone}">Phone</span></p>
+                </div>
+                <div class="candidate-skill">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div class="candidate-label">Kỹ năng:</div>
+                        <ul>
+                            <li th:each="candidateSkill : ${candidate.candidateSkills}" th:text="${candidateSkill.skill.skillName}">Kỹ năng</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="candidate-action">
+                <a th:href="@{/candidate/candidateDetail(candidateId=${candidate.candidateId})}" class="view-candidate-btn">Xem chi tiết</a>
+                <a href="#" class="hire-candidate-btn">Tuyển dụng</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <ul>
+            <li th:each="pageNum : ${pageNumbers}">
+                <a th:href="@{/candidate/suitableCandidate(jobId=${job.jobId}, page=${pageNum})}" th:text="${pageNum}">Số trang</a>
+            </li>
+        </ul>
+    </div>
+
+
+
+</div>
+</body>
+</html>

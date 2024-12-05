@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 16px;
+}
+
+.action-bar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.go-back-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.form-container {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 50%;
+    box-sizing: border-box;
+    margin: 20px auto;
+}
+
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.home-btn {
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.form-group {
+    flex: 1 1 calc(50% - 20px);
+    min-width: 200px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+button {
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.clear-btn {
+    background-color: #dc3545;
+}
+
+.clear-btn:hover {
+    background-color: #c82333;
+}
+
+.home-btn {
+    background-color: #007bff;
+}
+
+.home-btn:hover {
+    background-color: #0056b3;
+}

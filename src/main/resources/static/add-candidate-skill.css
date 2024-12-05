@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    box-sizing: border-box;
+    margin: 20px auto;
+}
+
+.form-group-skill {
+    margin-bottom: 15px;
+}
+
+.form-group-skill label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-skill {
+    display: flex;
+    justify-content: space-between;
+    align-content: baseline;
+}
+
+.form-group-skill select,
+.form-group-skill input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.add-skill-button,
+.add-job-button,
+.remove-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.add-skill-button {
+    background-color: #007bff;
+}
+
+.add-skill-button:hover {
+    background-color: #0056b3;
+}
+
+.add-job-button {
+    background-color: #28a745;
+}
+
+.add-job-button:hover {
+    background-color: #218838;
+}
+
+.remove-button {
+    background-color: #dc3545;
+}
+
+.remove-button:hover {
+    background-color: #c82333;
+}

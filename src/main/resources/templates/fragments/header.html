@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Header Fragment</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+</head>
+<body>
+<div th:fragment="header">
+    <div class="header">
+        <!-- Bên trái: Nút Home -->
+        <div class="left">
+            <a th:href="@{/job/listJobPage}" class="home-btn">Home</a>
+        </div>
+
+        <!-- Ở giữa: Tiêu đề -->
+        <div class="center">
+            Job Portal
+        </div>
+
+        <!-- Bên phải: Người dùng hoặc nút đăng nhập/đăng ký -->
+        <div class="right">
+    <span th:if="${user != null}">
+        <span th:if="${session.loginType == 'candidate'}">
+            Chào, <strong th:text="${user.fullName}">Tên Người Dùng</strong>
+        </span>
+        <span th:if="${session.loginType == 'employer'}">
+            Chào, <strong th:text="${user.companyName}">Tên Người Dùng</strong>
+        </span>
+        <a th:href="@{/logout}" class="logout-btn">Đăng xuất</a>
+    </span>
+            <span th:if="${user == null}">
+        <a th:href="@{/candidate/register}" class="register-btn">Đăng ký</a>
+        <a th:href="@{/login}" class="login-btn">Đăng nhập</a>
+    </span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

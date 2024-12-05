@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.skill-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.skill-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.skill-card .skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skill-card h2 {
+    font-size: 20px;
+    color: #007bff;
+    margin: 0 0 10px 0;
+    flex: 0 0 auto; /* Fixed size */
+}
+
+.skill-card p {
+    margin: 5px 0;
+    color: #333;
+    flex: 0 0 auto; /* Fixed size */
+}
+
+.skill-card .skill-type {
+    font-size: 14px;
+    color: #6c757d;
+    flex: 0 0 auto; /* Fixed size */
+}
+
+.action-bar {
+    margin-bottom: 20px;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.go-back-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.add-skill-btn {
+    text-decoration: none;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.skill-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex: 0 0 auto; /* Fixed size */
+}
+
+.skill-actions a {
+    text-decoration: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    border-radius: 4px;
+}
+
+.edit-skill-btn {
+    background-color: #ffc107;
+}
+
+.edit-skill-btn:hover {
+    background-color: #e0a800;
+}
+
+.delete-skill-btn {
+    background-color: #dc3545;
+}
+
+.delete-skill-btn:hover {
+    background-color: #c82333;
+}

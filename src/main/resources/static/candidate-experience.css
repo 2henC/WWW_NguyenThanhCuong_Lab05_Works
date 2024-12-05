@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.action-bar {
+    margin-bottom: 20px;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.go-back-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.add-experience-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.exp-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.exp-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.exp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.exp-header {
+    margin-bottom: 10px;
+}
+
+.exp-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.company-name {
+    font-size: 1.2em;
+    color: #777;
+}
+
+.exp-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.edit-exp-btn, .delete-exp-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.delete-exp-btn {
+    background-color: #DC3545;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination ul {
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .job-card {
+        flex: 0 1 calc(100% - 20px); /* Chiếm toàn bộ chiều rộng khi màn hình hẹp */
+    }
+}

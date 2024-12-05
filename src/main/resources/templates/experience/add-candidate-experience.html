@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Experience</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/add-candidate-experience.css}">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <h1 class="header-container">Thêm kinh nghiệm mới</h1>
+
+    <div class="form-container">
+        <form class="form-add-exp" method="post" th:object="${experience}" th:value="@{/candidate/addExperience}">
+            <div class="form-group-exp">
+                <h3>Thông tin kinh nghiệm</h3>
+                <div>
+                    <label for="role">Chức vụ:</label>
+                    <input type="text" id="role" name="role" th:field="*{role}" required>
+                </div>
+                <div>
+                    <label for="company">Tên công ty:</label>
+                    <input type="text" id="company" name="companyName" list="company-list" required
+                           oninput="setCompanyId()">
+                    <input type="hidden" id="companyId" name="companyId">
+                    <datalist id="company-list">
+                        <option th:each="c : ${companies}" th:value="${c.companyName}" th:data-id="${c.companyId}"
+                                th:text="${c.companyName}"></option>
+                    </datalist>
+                </div>
+                <div>
+                    <label for="description">Mô tả công việc:</label>
+                    <textarea id="description" name="description" th:field="*{workDescription}"></textarea>
+                </div>
+                <div class="form-date">
+                    <div>
+                        <label for="startDate">Từ ngày:</label>
+                        <input type="date" id="startDate" name="startDate" th:field="*{fromDate}" required>
+                    </div>
+                    <div>
+                        <label for="endDate">Đến ngày:</label>
+                        <input type="date" id="endDate" name="endDate" th:field="*{toDate}" required>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="add-exp-button">Thêm</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function setCompanyId() {
+        const companyInput = document.getElementById('company');
+        const companyIdInput = document.getElementById('companyId');
+        const dataList = document.getElementById('company-list');
+        const options = dataList.options;
+
+        companyIdInput.value = ""; // Reset the value
+
+        // Match the selected company name with its data-id
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].value === companyInput.value) {
+                companyIdInput.value = options[i].getAttribute('data-id');
+                break;
+            }
+        }
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Your Profile</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/candidate-update.css}">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <h1>Cập nhật thông tin cá nhân</h1>
+
+    <div class="action-bar">
+        <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
+    </div>
+
+    <div class="form-container">
+        <form th:action="@{/candidate/editProfile}" method="post" th:object="${candidate}">
+            <div class="form-group">
+                <label for="fullName">Họ và tên:</label>
+                <input type="text" id="fullName" th:field="*{fullName}" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Ngày sinh:</label>
+                <input type="date" id="dob" th:field="*{dob}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" id="phone" th:field="*{phone}" required>
+            </div>
+            <div class="form-group">
+                <label for="city">Thành phố:</label>
+                <input type="text" id="city" th:field="*{address.city}" required>
+            </div>
+            <div class="form-group">
+                <label for="street">Đường:</label>
+                <input type="text" id="street" th:field="*{address.street}" required>
+            </div>
+            <div class="form-group">
+                <label for="number">Số đường:</label>
+                <input type="text" id="number" th:field="*{address.number}" required>
+            </div>
+            <div class="form-group">
+                <label for="zipcode">Zipcode:</label>
+                <input type="text" id="zipcode" th:field="*{address.zipcode}" required>
+            </div>
+            <div class="form-group button-group">
+                <button type="submit">Lưu</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

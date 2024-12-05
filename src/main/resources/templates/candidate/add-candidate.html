@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Candidate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .home-btn {
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .form-group {
+            flex: 1 1 calc(50% - 20px);
+            min-width: 200px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .clear-btn {
+            background-color: #dc3545;
+        }
+        .clear-btn:hover {
+            background-color: #c82333;
+        }
+        .home-btn {
+            background-color: #007bff;
+        }
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<a th:href="@{/job/listJobPage}" class="home-btn">Home</a>
+<h1>Add New Candidate</h1>
+<form th:action="@{/candidate/register}" th:object="${candidate}" method="post">
+    <div class="form-group">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" th:field="*{fullName}" required>
+    </div>
+    <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" th:field="*{dob}" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" th:field="*{phone}" required>
+    </div>
+    <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" id="city" th:field="*{address.city}" required>
+    </div>
+    <div class="form-group">
+        <label for="street">Street:</label>
+        <input type="text" id="street" th:field="*{address.street}" required>
+    </div>
+    <div class="form-group">
+        <label for="number">Number:</label>
+        <input type="text" id="number" th:field="*{address.number}" required>
+    </div>
+    <div class="form-group">
+        <label for="zipcode">Zipcode:</label>
+        <input type="text" id="zipcode" th:field="*{address.zipcode}" required>
+    </div>
+    <div class="form-group button-group">
+        <button type="submit">Add Candidate</button>
+        <button type="reset" class="clear-btn">Clear Form</button>
+    </div>
+</form>
+</body>
+</html>

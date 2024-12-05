@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Your Skills</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/candidate-skill.css}">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header"></div>
+    <h1>Quản lý kỹ năng cá nhân</h1>
+    <div class="action-bar">
+        <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
+        <a href="/candidate/addSkill" class="add-skill-btn">Thêm kỹ năng mới</a>
+    </div>
+    <div class="skill-cards">
+        <div th:each="candidateSkill : ${candidateSkills}" class="skill-card">
+            <div class="skill-header">
+                <h2 th:text="${candidateSkill.skill.skillName}">Skill Name</h2>
+                <p class="skill-type" th:text="${candidateSkill.skill.skillType}">Skill Type</p>
+            </div>
+            <p><strong>Level:</strong> <span th:text="${candidateSkill.skillLevel}">Level</span></p>
+            <p><strong>More Info:</strong> <span th:text="${candidateSkill.moreInfo}">More Info</span></p>
+            <div class="skill-actions">
+                <a href="#" class="edit-skill-btn">Cập nhật</a>
+                <a href="#" class="delete-skill-btn">Xóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
