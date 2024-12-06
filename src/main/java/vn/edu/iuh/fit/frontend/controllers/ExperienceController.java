@@ -4,10 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.iuh.fit.backend.models.Candidate;
 import vn.edu.iuh.fit.backend.models.Company;
@@ -65,12 +62,49 @@ public class ExperienceController {
         Object loggedInUser = session.getAttribute("user");
         if (loggedInUser == null) return "redirect:/login";
         experience.setCandidate((Candidate) loggedInUser);
-        System.out.println("Company ID: " + companyId);
         Company company = companyService.findCompanyById(companyId);
         if (company != null) {
             experience.setCompany(company);
         }
         experienceService.save(experience);
+        return "redirect:/candidate/manageExperience";
+    }
+
+    @RequestMapping(value = "candidate/editExperience/{id}", method = RequestMethod.GET)
+    public ModelAndView showFormUpdateExperience(HttpSession session, @PathVariable("id") long id) {
+        ModelAndView modelAndView = new ModelAndView("experience/update-candidate-experience");
+        Object loggedInUser = session.getAttribute("user");
+        if (loggedInUser == null) return new ModelAndView("redirect:/login");
+        modelAndView.addObject("user", loggedInUser);
+
+        Experience experience = experienceService.findById(id);
+        if (experience == null) return new ModelAndView("redirect:/candidate/manageExperience");
+        modelAndView.addObject("experience", experience);
+        List<Company> companies = companyService.findAllCompany();
+        modelAndView.addObject("companies", companies);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "candidate/updateExperience/{id}", method = RequestMethod.POST)
+    public String updateCandidateExperience(HttpSession session, @PathVariable("id") long id, @ModelAttribute Experience updatedExperience, @RequestParam("companyId") Long companyId) {
+        Object loggedInUser = session.getAttribute("user");
+        if (loggedInUser == null) return "redirect:/login";
+
+        Experience existingExperience = experienceService.findById(id);
+        if (existingExperience == null) return "redirect:/candidate/manageExperience";
+
+        existingExperience.setRole(updatedExperience.getRole());
+        existingExperience.setWorkDescription(updatedExperience.getWorkDescription());
+        existingExperience.setFromDate(updatedExperience.getFromDate());
+        existingExperience.setToDate(updatedExperience.getToDate());
+        existingExperience.setCandidate((Candidate) loggedInUser);
+
+        Company company = companyService.findCompanyById(companyId);
+        if (company != null) {
+            existingExperience.setCompany(company);
+        }
+
+        experienceService.save(existingExperience);
         return "redirect:/candidate/manageExperience";
     }
 }

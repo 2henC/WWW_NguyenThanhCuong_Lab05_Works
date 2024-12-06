@@ -94,15 +94,15 @@
     </style>
 </head>
 <body>
-<a th:href="@{/job/listJobPage}" class="home-btn">Home</a>
+<a th:href="@{/job/listJobPage}" class="home-btn">Quay lại trang chủ</a>
 <h1>Add New Candidate</h1>
 <form th:action="@{/candidate/register}" th:object="${candidate}" method="post">
     <div class="form-group">
-        <label for="fullName">Full Name:</label>
+        <label for="fullName">Họ và tên:</label>
         <input type="text" id="fullName" th:field="*{fullName}" required>
     </div>
     <div class="form-group">
-        <label for="dob">Date of Birth:</label>
+        <label for="dob">Ngày sinh:</label>
         <input type="date" id="dob" th:field="*{dob}" required>
     </div>
     <div class="form-group">
@@ -110,19 +110,19 @@
         <input type="email" id="email" th:field="*{email}" required>
     </div>
     <div class="form-group">
-        <label for="phone">Phone:</label>
+        <label for="phone">Số điện thoại:</label>
         <input type="text" id="phone" th:field="*{phone}" required>
     </div>
     <div class="form-group">
-        <label for="city">City:</label>
+        <label for="city">Thành phố:</label>
         <input type="text" id="city" th:field="*{address.city}" required>
     </div>
     <div class="form-group">
-        <label for="street">Street:</label>
+        <label for="street">Đường:</label>
         <input type="text" id="street" th:field="*{address.street}" required>
     </div>
     <div class="form-group">
-        <label for="number">Number:</label>
+        <label for="number">Số đường:</label>
         <input type="text" id="number" th:field="*{address.number}" required>
     </div>
     <div class="form-group">

@@ -28,11 +28,11 @@ public class ExperienceService {
         return experienceRepository.findAllByCandidate(candidate);
     }
 
-    public Experience saveExperience(Experience experience) {
-        return experienceRepository.save(experience);
-    }
-
     public  void save (Experience experience){
         experienceRepository.save(experience);
     }
+
+ public Experience findById(long id) {
+        return experienceRepository.findByExperienceId(id);
+ }
 }

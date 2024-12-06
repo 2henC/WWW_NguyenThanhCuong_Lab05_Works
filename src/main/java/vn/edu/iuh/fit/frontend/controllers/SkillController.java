@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/api")
 public class SkillController {
 
     @Autowired
@@ -60,11 +59,40 @@ public class SkillController {
     }
 
     @RequestMapping(value = "candidate/addSkill", method = RequestMethod.POST)
-    public String addCandidateSkill(HttpSession session, @ModelAttribute CandidateSkill candidateSkill) {
+    public ModelAndView addCandidateSkill(HttpSession session, @ModelAttribute CandidateSkill candidateSkill) {
         Object loggedInUser = session.getAttribute("user");
-        if (loggedInUser == null) return ("redirect:/login");
+        if (loggedInUser == null) return new ModelAndView("redirect:/login");
         candidateSkill.setCandidate((Candidate) loggedInUser);
         candidateSkillService.save(candidateSkill);
-        return "redirect:/candidate/manageSkills";
+        return new ModelAndView("redirect:/candidate/manageSkills");
+    }
+
+    @RequestMapping(value = "candidate/editSkill/{id}", method = RequestMethod.GET)
+    public ModelAndView showFormEditSkill(HttpSession session, @PathVariable("id") long id) {
+        ModelAndView modelAndView = new ModelAndView("skill/add-candidate-skill");
+        Object loggedInUser = session.getAttribute("user");
+        if (loggedInUser == null) {
+            return new ModelAndView("redirect:/login");
+        }
+        modelAndView.addObject("user", loggedInUser);
+        List<CandidateSkill> candidateSkills = candidateSkillService.findAllByCandidate((Candidate) loggedInUser);
+        candidateSkills.forEach(candidateSkill -> {
+            if (candidateSkill.getSkill().getSkillId() == id) {
+                modelAndView.addObject("candidateSkill", candidateSkill);
+            }
+        });
+        List<Skill> skills = skillService.findAllSkills();
+        modelAndView.addObject("skills", skills);
+        modelAndView.addObject("skillLevels", SkillLevel.values());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/candidate/updateSkill/{skillId}", method = RequestMethod.POST)
+    public ModelAndView updateCandidateSkill(@PathVariable Long skillId, @ModelAttribute CandidateSkill candidateSkill, HttpSession session) {
+        Object loggedInUser = session.getAttribute("user");
+        if (loggedInUser == null) return new ModelAndView("redirect:/login");
+        candidateSkill.setCandidate((Candidate) loggedInUser);
+        candidateSkillService.save(candidateSkill);
+        return new ModelAndView("redirect:/candidate/manageSkills");
     }
 }

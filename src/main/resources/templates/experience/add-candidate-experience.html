@@ -11,6 +11,10 @@
     <div th:replace="fragments/header :: header"></div>
     <h1 class="header-container">Thêm kinh nghiệm mới</h1>
 
+    <div class="action-bar">
+        <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
+    </div>
+
     <div class="form-container">
         <form class="form-add-exp" method="post" th:object="${experience}" th:value="@{/candidate/addExperience}">
             <div class="form-group-exp">

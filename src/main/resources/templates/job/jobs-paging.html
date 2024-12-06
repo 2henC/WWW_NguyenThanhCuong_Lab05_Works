@@ -16,14 +16,13 @@
         <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
         <div>
         <span th:if="${session.loginType == 'employer'}">
+            <a th:href="@{/company/manageProfile}" class="manage-profile-btn">Quản lý hồ sơ</a>
         <a th:href="@{/job/manageJob}" class="manage-job-btn">Quản lý bài đăng</a>
         <a th:href="@{/job/addJob}" class="create-job-btn">+ Tạo mới công việc</a>
     </span>
             <span th:if="${session.loginType == 'candidate'}">
         <a th:href="@{/job/suitableJob}" class="find-suitableJob-btn">Xem các công việc phù hợp</a>
         <a th:href="@{/candidate/manageProfile}" class="manage-profile-btn">Quản lý hồ sơ</a>
-<!--        <a th:href="@{/candidate/manageSkills}" class="manage-skills-btn">Quản lý kỹ năng</a>-->
-<!--        <a th:href="@{/candidate/manageExperience}" class="manage-experience-btn">Quản lý kinh nghiệm</a>-->
     </span>
         </div>
     </div>

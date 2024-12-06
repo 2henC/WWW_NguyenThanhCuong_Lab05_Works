@@ -32,4 +32,8 @@ public class CompanyService {
     public Company findCompanyByName(String companyName) {
         return companyRepository.findByCompanyName(companyName);
     }
+
+    public  void save(Company company) {
+        companyRepository.save(company);
+    }
 }

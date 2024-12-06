@@ -19,19 +19,27 @@
 
         <!-- Bên phải: Người dùng hoặc nút đăng nhập/đăng ký -->
         <div class="right">
-    <span th:if="${user != null}">
-        <span th:if="${session.loginType == 'candidate'}">
-            Chào, <strong th:text="${user.fullName}">Tên Người Dùng</strong>
-        </span>
-        <span th:if="${session.loginType == 'employer'}">
-            Chào, <strong th:text="${user.companyName}">Tên Người Dùng</strong>
-        </span>
-        <a th:href="@{/logout}" class="logout-btn">Đăng xuất</a>
-    </span>
+            <span th:if="${user != null}">
+                <span th:if="${session.loginType == 'candidate'}">
+                    Chào, <strong th:text="${user.fullName}">Tên Người Dùng</strong>
+                </span>
+                <span th:if="${session.loginType == 'employer'}">
+                    Chào, <strong th:text="${user.companyName}">Tên Người Dùng</strong>
+                </span>
+                <a th:href="@{/logout}" class="logout-btn">Đăng xuất</a>
+            </span>
             <span th:if="${user == null}">
-        <a th:href="@{/candidate/register}" class="register-btn">Đăng ký</a>
-        <a th:href="@{/login}" class="login-btn">Đăng nhập</a>
-    </span>
+                <div class="dropdown">
+                    <a class="register-btn">Đăng ký</a>
+                    <div class="dropdown-content">
+                        <div style="display: flex; align-items: center ">
+                            <a th:href="@{/candidate/register}">Candidate</a>
+                        <a th:href="@{/company/register}">Company</a>
+                        </div>
+                    </div>
+                </div>
+                <a th:href="@{/login}" class="login-btn">Đăng nhập</a>
+            </span>
         </div>
     </div>
 </div>

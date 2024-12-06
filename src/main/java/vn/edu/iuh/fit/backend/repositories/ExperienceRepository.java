@@ -13,4 +13,6 @@ public interface ExperienceRepository extends JpaRepository<Experience, Long> {
     Page<Experience> findByCandidate(Pageable pageable, Candidate candidate);
 
     List<Experience> findAllByCandidate(Candidate candidate);
+
+    Experience findByExperienceId(long id);
 }

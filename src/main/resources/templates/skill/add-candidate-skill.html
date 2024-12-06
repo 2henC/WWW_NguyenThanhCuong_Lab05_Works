@@ -2,38 +2,40 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Your New Skill</title>
+    <title>Add or Update Skill</title>
     <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/add-candidate-skill.css}">
 </head>
 <body>
 <div class="container">
     <div th:replace="fragments/header :: header"></div>
-    <div class="header-container"><h1>Add New Skill</h1></div>
+    <div class="header-container"><h1 th:text="${candidateSkill.skill == null ? 'Thêm kỹ năng' : 'Cập nhật kỹ năng'}"></h1></div>
+
+    <div class="action-bar">
+        <a href="javascript:history.back()" class="go-back-btn">Quay lại</a>
+    </div>
 
     <div class="form-container">
-        <form th:value="@{/candidate/addSkill}" th:object="${candidateSkill}" method="post" class="form-add-skill">
-            <div class="form-group-skill" >
+        <!-- Form for adding a new skill -->
+        <form th:object="${candidateSkill}" method="post" class="form-add-skill" th:action="@{/candidate/addSkill}" th:if="${candidateSkill.skill == null}">
+            <div class="form-group-skill">
                 <label>Required Skills:</label>
                 <div class="form-skill">
                     <div style="display: flex; justify-content: space-between; align-items: baseline">
                         <div style="flex: 2; margin-right: 10px;">
                             <select name="skill.skillId" required>
                                 <option value="" disabled selected>Select a skill</option>
-                                <option th:each="skill : ${skills}" th:value="${skill.skillId}"
-                                        th:text="${skill.skillName}"></option>
+                                <option th:each="skill : ${skills}" th:value="${skill.skillId}" th:text="${skill.skillName}"></option>
                             </select>
                         </div>
                         <div style="flex: 1; margin-right: 10px;">
                             <select name="skillLevel" required>
                                 <option value="" disabled selected>Skill level</option>
-                                <option th:each="level : ${skillLevels}"
-                                        th:value="${level}"
-                                        th:text="${level}"></option>
+                                <option th:each="level : ${skillLevels}" th:value="${level}" th:text="${level}"></option>
                             </select>
                         </div>
                         <div style="flex: 2; margin-right: 10px;">
-                            <input type="text" id="moreInfo" name="moreInfo" th:field="*{moreInfo}">
+                            <input type="text" name="moreInfo" th:field="*{moreInfo}">
                         </div>
                         <div style="flex: 1;">
                             <button type="button" class="remove-button" onclick="removeSkill(this)">Remove</button>
@@ -45,7 +47,36 @@
                 <button type="button" class="add-skill-button" onclick="addSkill()">Add One More</button>
             </div>
             <div class="form-group">
-                <button type="submit" class="add-job-button">Add Skill</button>
+                <button type="submit" class="add-job-button">Thêm kỹ năng</button>
+            </div>
+        </form>
+
+        <!-- Form for updating an existing skill -->
+        <form th:object="${candidateSkill}" method="post" class="form-add-skill" th:action="@{'/candidate/updateSkill/' + ${candidateSkill.skill.skillId}}" th:unless="${candidateSkill.skill == null}">
+            <div class="form-group-skill">
+                <label>Required Skills:</label>
+                <div class="form-skill">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline">
+                        <div style="flex: 3; margin-right: 10px;">
+                            <select name="skill.skillId" required>
+                                <option value="" disabled selected>Select a skill</option>
+                                <option th:each="skill : ${skills}" th:value="${skill.skillId}" th:text="${skill.skillName}" th:selected="${candidateSkill.skill != null and candidateSkill.skill.skillId == skill.skillId}"></option>
+                            </select>
+                        </div>
+                        <div style="flex: 2; margin-right: 10px;">
+                            <select name="skillLevel" required>
+                                <option value="" disabled selected>Skill level</option>
+                                <option th:each="level : ${skillLevels}" th:value="${level}" th:text="${level}" th:selected="${candidateSkill.skillLevel == level}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" name="moreInfo" th:field="*{moreInfo}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="add-job-button">Cập nhật</button>
             </div>
         </form>
     </div>
@@ -60,7 +91,7 @@
         <option value="" disabled selected>Skill level</option>
         <option th:each="level : ${skillLevels}" th:value="${level}" th:text="${level}"></option>
     </select>
-    <input type="text"  name="candidateSkills[0].moreInfo" th:field="*{moreInfo}">
+    <input type="text" name="candidateSkills[0].moreInfo" th:field="*{moreInfo}">
 </div>
 
 <script>
@@ -91,7 +122,6 @@
 
         const removeButtonContainer = document.createElement('div');
         removeButtonContainer.style.flex = '1';
-        // removeButtonContainer.style.marginRight = '10px';
 
         const removeButton = document.createElement('button');
         removeButton.type = 'button';

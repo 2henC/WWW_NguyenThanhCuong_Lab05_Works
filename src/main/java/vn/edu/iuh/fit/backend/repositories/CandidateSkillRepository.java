@@ -11,4 +11,5 @@ public interface CandidateSkillRepository extends JpaRepository<CandidateSkill, 
 
     List<CandidateSkill> findByCandidate(Candidate candidate);
 
+    CandidateSkill findCandidateSkillBySkill(Skill skill);
 }

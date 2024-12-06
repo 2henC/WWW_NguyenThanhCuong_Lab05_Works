@@ -38,17 +38,10 @@ public class CandidateController {
     private CandidateSkillService candidateSkillService;
 
     @Autowired
-    private SkillService skillService;
-
-    @Autowired
     private ExperienceService experienceService;
 
     @Autowired
-    private CompanyService companyService;
-
-    @Autowired
     private JobService jobService;
-
 
     @RequestMapping(value = "/listCandidate", method = RequestMethod.GET)
     public ModelAndView showCandidateList() {
@@ -144,94 +137,6 @@ public class CandidateController {
 
         return "redirect:/candidate/manageProfile";
     }
-
-//    @RequestMapping(value = "/manageSkills", method = RequestMethod.GET)
-//    public ModelAndView manageCandidateSkills(HttpSession session) {
-//        ModelAndView modelAndView = new ModelAndView("skill/candidate-skill");
-//        Object loggedInUser = session.getAttribute("user");
-//        modelAndView.addObject("user", loggedInUser);
-//        if (loggedInUser == null) {
-//            return new ModelAndView("redirect:/login");
-//        }
-//        List<CandidateSkill> candidateSkills = candidateSkillService.findAllByCandidate((Candidate) loggedInUser);
-//        modelAndView.addObject("candidateSkills", candidateSkills);
-//        List<Skill> skills = new ArrayList<>();
-//        candidateSkills.forEach(candidateSkill -> {
-//            skills.add(candidateSkill.getSkill());
-//        });
-//        modelAndView.addObject("skills", skills);
-//        return modelAndView;
-//    }
-
-//    @RequestMapping(value = "/addSkill", method = RequestMethod.GET)
-//    public ModelAndView showFormAddSkill(HttpSession session) {
-//        ModelAndView modelAndView = new ModelAndView("skill/add-candidate-skill");
-//        modelAndView.addObject("candidateSkill", new CandidateSkill());
-////        modelAndView.addObject("candidateSkills", new ArrayList<CandidateSkill>());
-//        Object loggedInUser = session.getAttribute("user");
-//        if (loggedInUser == null) {
-//            return new ModelAndView("redirect:/login");
-//        }
-//        modelAndView.addObject("user", loggedInUser);
-//        List<Skill> skills = skillService.findAllSkills();
-//        modelAndView.addObject("skills", skills);
-//        modelAndView.addObject("skillLevels", SkillLevel.values());
-//        return modelAndView;
-//    }
-
-//    @RequestMapping(value = "/addSkill", method = RequestMethod.POST)
-//    public String addCandidateSkill(HttpSession session, @ModelAttribute CandidateSkill candidateSkill) {
-//        Object loggedInUser = session.getAttribute("user");
-//        if (loggedInUser == null) return ("redirect:/login");
-//        candidateSkill.setCandidate((Candidate) loggedInUser);
-//        candidateSkillService.save(candidateSkill);
-//        return "redirect:/candidate/manageSkills";
-//    }
-
-//    @RequestMapping(value = "/manageExperience", method = RequestMethod.GET)
-//    public ModelAndView manageCandidateExperience(HttpSession session, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-//        ModelAndView modelAndView = new ModelAndView("experience/candidate-experience");
-//        Object loggedInUser = session.getAttribute("user");
-//        modelAndView.addObject("user", loggedInUser);
-//        if (loggedInUser == null) return new ModelAndView("redirect:/login");
-//
-//        int currentPage = page.orElse(1);
-//        int pageSize = size.orElse(10);
-//        Page<Experience> experiencePage = experienceService.findAllExperienceByCandidatePaging(currentPage - 1, pageSize, "experienceId", "asc", (Candidate) loggedInUser);
-//        modelAndView.addObject("experiencePage", experiencePage);
-//        int totalPages = experiencePage.getTotalPages();
-//        if (totalPages > 0) {
-//            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-//            modelAndView.addObject("pageNumbers", pageNumbers);
-//        }
-//        return modelAndView;
-//    }
-
-//    @RequestMapping(value = "/addExperience", method = RequestMethod.GET)
-//    public ModelAndView showFormAddExperience(HttpSession session) {
-//        ModelAndView modelAndView = new ModelAndView("experience/add-candidate-experience");
-//        modelAndView.addObject("experience", new Experience());
-//        Object loggedInUser = session.getAttribute("user");
-//        if (loggedInUser == null) return new ModelAndView("redirect:/login");
-//        modelAndView.addObject("user", loggedInUser);
-//        List<Company> companies = companyService.findAllCompany();
-//        modelAndView.addObject("companies", companies);
-//        return modelAndView;
-//    }
-
-//    @RequestMapping(value = "/addExperience", method = RequestMethod.POST)
-//    public String addCandidateExperience(HttpSession session, @ModelAttribute Experience experience, @RequestParam("companyId") Long companyId) {
-//        Object loggedInUser = session.getAttribute("user");
-//        if (loggedInUser == null) return "redirect:/login";
-//        experience.setCandidate((Candidate) loggedInUser);
-//        System.out.println("Company ID: " + companyId);
-//        Company company = companyService.findCompanyById(companyId);
-//        if (company != null) {
-//            experience.setCompany(company);
-//        }
-//        experienceService.save(experience);
-//        return "redirect:/candidate/manageExperience";
-//    }
 
     @RequestMapping(value = "/suitableCandidate", method = RequestMethod.GET)
     public ModelAndView findSuitableCandidate(HttpSession session, @RequestParam("jobId") Long jobId, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {

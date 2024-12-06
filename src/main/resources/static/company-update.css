@@ -15,6 +15,9 @@ h1 {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .action-bar {
@@ -43,66 +46,83 @@ h1 {
     margin: 20px auto;
 }
 
-.form-group-skill {
+.form-group {
     margin-bottom: 15px;
 }
 
-.form-group-skill label {
+.form-group label {
     display: block;
     margin-bottom: 5px;
     color: #333;
+    font-weight: bold;
 }
 
-.form-skill {
-    display: flex;
-    justify-content: space-between;
-    align-content: baseline;
-}
-
-.form-group-skill select,
-.form-group-skill input {
+.form-group input,
+.form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-bottom: 10px;
 }
 
-.add-skill-button,
-.add-job-button,
-.remove-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.clear-btn:hover {
+    background-color: #c82333;
+}
+
+.home-btn:hover {
+    background-color: #0056b3;
+}
+
+.address-company {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.address-company .form-group {
+    flex: 1 1 calc(50% - 20px);
+    min-width: 200px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+.submit-btn {
+    background-color: #28a745;
     color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
 }
 
-.add-skill-button {
-    background-color: #007bff;
-}
-
-.add-skill-button:hover {
-    background-color: #0056b3;
-}
-
-.add-job-button {
-    background-color: #28a745;
-}
-
-.add-job-button:hover {
+.submit-btn:hover {
     background-color: #218838;
 }
 
-.remove-button {
+.clear-btn {
     background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-.remove-button:hover {
+.clear-btn:hover {
     background-color: #c82333;
 }

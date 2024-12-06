@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Company</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/add-company.css}">
+</head>
+<body>
+<a th:href="@{/job/listJobPage}" class="home-btn">Quay lại</a>
+<div class="container">
+    <h1>Đăng ký công ty</h1>
+    <form action="/company/register" method="post" th:object="${company}">
+        <div class="form-group">
+            <label for="companyName">Tên công ty:</label>
+            <input type="text" id="companyName" name="companyName" required>
+        </div>
+        <div class="form-group">
+            <label for="webUrl">Website URL:</label>
+            <input type="text" id="webUrl" name="webUrl" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Số điện thoại:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="about">Thông tin thêm về công ty:</label>
+            <textarea id="about" name="about" rows="4"></textarea>
+        </div>
+        <h4>Địa chỉ công ty</h4>
+        <div class="address-company">
+            <div class="form-group">
+                <label for="city">Thành phố:</label>
+                <input type="text" id="city" th:field="*{address.city}" required>
+            </div>
+            <div class="form-group">
+                <label for="street">Đường:</label>
+                <input type="text" id="street" th:field="*{address.street}" required>
+            </div>
+            <div class="form-group">
+                <label for="number">Số đường:</label>
+                <input type="text" id="number" th:field="*{address.number}" required>
+            </div>
+            <div class="form-group">
+                <label for="zipcode">Zipcode:</label>
+                <input type="text" id="zipcode" th:field="*{address.zipcode}" required>
+            </div>
+        </div>
+        <div class="form-group button-group">
+            <button type="submit" class="submit-btn">Đăng ký</button>
+            <button type="reset" class="clear-btn">Clear Form</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

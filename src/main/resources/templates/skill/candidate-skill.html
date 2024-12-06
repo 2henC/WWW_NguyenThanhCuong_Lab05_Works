@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Manage Your Skills</title>
@@ -23,8 +23,7 @@
             <p><strong>Level:</strong> <span th:text="${candidateSkill.skillLevel}">Level</span></p>
             <p><strong>More Info:</strong> <span th:text="${candidateSkill.moreInfo}">More Info</span></p>
             <div class="skill-actions">
-                <a href="#" class="edit-skill-btn">Cập nhật</a>
-                <a href="#" class="delete-skill-btn">Xóa</a>
+                <a th:href="@{'/candidate/editSkill/' + ${candidateSkill.skill.skillId}}" class="edit-skill-btn">Cập nhật</a>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ public class AddressService {
     private AddressRepository addressRepository;
 
     public Address findById(long id) {
-        return addressRepository.findById(id).get();
+        return addressRepository.findByAddressId(id);
     }
 
 //    Nếu địa chỉ đã tồn tại thì trả về true, ngược lại trả về false

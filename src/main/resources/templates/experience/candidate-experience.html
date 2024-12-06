@@ -24,8 +24,8 @@
             <p><strong>Đến ngày:</strong> <span th:text="${experience.toDate}">End date</span></p>
             <p><strong>Mô tả công việc:</strong> <span th:text="${experience.workDescription}">Word description</span></p>
             <div class="exp-actions">
-                <a href="#" class="edit-exp-btn">Cập nhật</a>
-                <a href="#" class="delete-exp-btn">Xóa</a>
+                <a th:href="@{'/candidate/editExperience/' + ${experience.getExperienceId()}}" class="edit-exp-btn">Cập nhật</a>
+<!--                <a href="#" class="delete-exp-btn">Xóa</a>-->
             </div>
         </div>
     </div>

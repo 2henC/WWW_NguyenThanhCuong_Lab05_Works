@@ -5,5 +5,7 @@ import vn.edu.iuh.fit.backend.models.Address;
 
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    public Address findAddressByNumberAndStreetAndCityAndZipcode (String number, String street, String city, String zipcode);
+     Address findAddressByNumberAndStreetAndCityAndZipcode (String number, String street, String city, String zipcode);
+
+        Address findByAddressId(long id);
 }
