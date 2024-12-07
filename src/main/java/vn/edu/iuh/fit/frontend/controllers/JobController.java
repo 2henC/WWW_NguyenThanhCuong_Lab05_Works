@@ -101,6 +101,35 @@ public class JobController {
         return "redirect:/job/manageJob";
     }
 
+    @RequestMapping(value = "/job/editJob/{jobId}", method = RequestMethod.GET)
+    public ModelAndView showEditJobForm(@PathVariable("jobId") Long jobId, HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("job/job-update");
+        Object loggedInUser = session.getAttribute("user");
+        if (loggedInUser == null) return new ModelAndView("redirect:/login");
+        modelAndView.addObject("user", (Company) loggedInUser);
+
+        Job job = jobService.findJobById(jobId);
+        modelAndView.addObject("job", job);
+
+        List<JobSkill> jobSkills = jobSkillService.findAllByJobId(job);
+        modelAndView.addObject("jobSkills", jobSkills);
+
+        List<Skill> skills = skillService.findAllSkills();
+        modelAndView.addObject("skills", skills);
+        modelAndView.addObject("skillLevels", SkillLevel.values());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/job/updateJob/{jobId}", method = RequestMethod.POST)
+    public ModelAndView editJob(@ModelAttribute Job job, HttpSession session, @PathVariable("jobId") long jobId) {
+        ModelAndView modelAndView = new ModelAndView("job/job-update");
+        Object loggedInUser = session.getAttribute("user");
+        if (loggedInUser == null) return new ModelAndView( "redirect:/login");
+        modelAndView.addObject("user", loggedInUser);
+        System.out.println(job);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/job/suitableJob", method = RequestMethod.GET)
     public ModelAndView showSuitableJob(HttpSession session, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
         ModelAndView modelAndView = new ModelAndView("job/jobs-paging");

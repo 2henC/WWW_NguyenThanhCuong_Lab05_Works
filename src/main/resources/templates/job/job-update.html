@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Job</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/job-update.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/header.css}">
+</head>
+<body>
+<div class="container">
+  <div class="header-container">
+    <div th:replace="fragments/header :: header"></div>
+  </div>
+
+  <h1>Update Job</h1>
+
+  <div class="action-bar">
+    <a href="javascript:history.back()" class="go-back-btn">Go Back</a>
+  </div>
+
+  <div class="form-container">
+    <form th:action="@{'/job/updateJob/' + ${job.jobId}}" th:object="${job}" method="post" class="add-job-form">
+      <div class="form-group">
+        <label for="jobName">Job Name:</label>
+        <input type="text" id="jobName" name="jobName" th:field="*{jobName}" required>
+      </div>
+      <div class="form-group">
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName" th:value="${user.companyName}" disabled required>
+      </div>
+      <div class="form-group">
+        <label for="jobDescription">Job Description:</label>
+        <textarea id="jobDescription" name="jobDescription" th:field="*{jobDescription}" required></textarea>
+      </div>
+      <div class="form-group-skill">
+        <label>Required Skills:</label>
+        <div class="form-skill" th:each="jobSkill, iterStat : ${jobSkills}">
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <div style="flex: 2; margin-right: 10px;">
+              <select name="jobSkills[${iterStat.index}].skill.skillId" required>
+                <option value="" disabled>Select a skill</option>
+                <option th:each="skill : ${skills}" th:value="${skill.skillId}" th:text="${skill.skillName}" th:selected="${skill.skillId == jobSkill.skill.skillId}"></option>
+              </select>
+            </div>
+            <div style="flex: 2; margin-left: 10px;">
+              <select name="jobSkills[${iterStat.index}].skillLevel" required>
+                <option value="" disabled>Select skill level</option>
+                <option th:each="level : ${skillLevels}" th:value="${level}" th:text="${level}" th:selected="${level == jobSkill.skillLevel}"></option>
+              </select>
+            </div>
+            <div style="flex: 1; margin-left: 10px;">
+              <button type="button" class="remove-button" onclick="removeSkill(this)">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="add-skill-button" onclick="addSkill()">Thêm kỹ năng mới</button>
+      </div>
+      <div class="form-group" style="display: flex; justify-content: space-evenly; align-items: center; gap: 50px">
+        <button type="submit" class="add-job-button">Lưu</button>
+        <button type="reset" class="add-job-button">Hủy bỏ</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Template for adding new skills -->
+<div id="skill-template" style="display: none;">
+  <select name="jobSkills[0].skill.skillId" required>
+    <option value="" disabled>Select a skill</option>
+    <option th:each="skill : ${skills}" th:value="${skill.skillId}" th:text="${skill.skillName}"></option>
+  </select>
+  <select name="jobSkills[0].skillLevel" required>
+    <option value="" disabled>Select skill level</option>
+    <option th:each="level : ${skillLevels}" th:value="${level}" th:text="${level}"></option>
+  </select>
+</div>
+
+<script>
+  let skillIndex = /*[[${jobSkills.size()}]]*/ 0;
+
+  function addSkill() {
+    const skillTemplate = document.getElementById('skill-template');
+    const skillContainer = document.createElement('div');
+    skillContainer.className = 'form-skill';
+    skillContainer.style.display = 'flex';
+    skillContainer.style.justifyContent = 'space-between';
+    skillContainer.style.alignItems = 'center';
+
+    const skillSelectContainer = document.createElement('div');
+    skillSelectContainer.style.flex = '2';
+    skillSelectContainer.style.marginRight = '10px';
+    skillSelectContainer.innerHTML = skillTemplate.children[0].outerHTML.replace(/\[0\]/g, `[${skillIndex}]`);
+
+    const levelSelectContainer = document.createElement('div');
+    levelSelectContainer.style.flex = '2';
+    levelSelectContainer.style.marginLeft = '10px';
+    levelSelectContainer.innerHTML = skillTemplate.children[1].outerHTML.replace(/\[0\]/g, `[${skillIndex}]`);
+
+    const removeButtonContainer = document.createElement('div');
+    removeButtonContainer.style.flex = '1';
+    removeButtonContainer.style.marginLeft = '10px';
+
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.className = 'remove-button';
+    removeButton.textContent = 'Remove';
+    removeButton.onclick = function() {
+      skillContainer.remove();
+    };
+    removeButtonContainer.appendChild(removeButton);
+
+    skillContainer.appendChild(skillSelectContainer);
+    skillContainer.appendChild(levelSelectContainer);
+    skillContainer.appendChild(removeButtonContainer);
+
+    document.querySelector('.form-group-skill').appendChild(skillContainer);
+
+    // Reset the select elements to their default state
+    skillContainer.querySelector('select[name*="jobSkills"]').selectedIndex = 0;
+    skillContainer.querySelector('select[name*="skillLevel"]').selectedIndex = 0;
+
+    skillIndex++;
+  }
+
+  function removeSkill(button) {
+    const formGroupSkill = document.querySelector('.form-group-skill');
+    const formSkills = formGroupSkill.querySelectorAll('.form-skill');
+    if (formSkills.length > 1) {
+      button.closest('.form-skill').remove();
+    } else {
+      alert('At least one skill is required for each job!');
+    }
+  }
+</script>
+</body>
+</html>

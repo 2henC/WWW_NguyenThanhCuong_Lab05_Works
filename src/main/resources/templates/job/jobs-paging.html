@@ -48,9 +48,9 @@
                 </span>
                 <span th:if="${session.user != null and session.loginType == 'employer' and managedJobs != null}">
                    <a th:href="@{/candidate/suitableCandidate(jobId=${job.jobId})}" class="find-suitableCandidate-btn">Tìm ứng viên phù hợp</a>
-                    <a th:href="@{/job/edit(id=${job.jobId})}" class="edit-btn">Cập nhật</a>
+                    <a th:href="@{'/job/editJob/' + ${job.jobId}}" class="edit-btn">Cập nhật</a>
                     <a th:href="@{/job/delete(id=${job.jobId})}" class="delete-btn"
-                       onclick="return confirm('Bạn có chắc chắn muốn xóa công việc này?')">Xóa</a>
+                       onclick="return confirm('Bạn có chắc chắn muốn xóa công việc này?')">Ngừng tuyển ứng viên</a>
                 </span>
             </div>
         </div>
