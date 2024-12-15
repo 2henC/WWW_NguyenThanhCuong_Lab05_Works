@@ -121,12 +121,22 @@ public class JobController {
     }
 
     @RequestMapping(value = "/job/updateJob/{jobId}", method = RequestMethod.POST)
-    public ModelAndView editJob(@ModelAttribute Job job, HttpSession session, @PathVariable("jobId") long jobId) {
-        ModelAndView modelAndView = new ModelAndView("job/job-update");
+    public ModelAndView updateJob(@ModelAttribute Job job, HttpSession session, @PathVariable("jobId") long jobId) {
+        ModelAndView modelAndView = new ModelAndView("job/jobs-paging");
         Object loggedInUser = session.getAttribute("user");
         if (loggedInUser == null) return new ModelAndView( "redirect:/login");
         modelAndView.addObject("user", loggedInUser);
-        System.out.println(job);
+        Job updatedJob = jobService.findJobById(jobId);
+        updatedJob.setJobName(job.getJobName());
+        updatedJob.setJobDescription(job.getJobDescription());
+        updatedJob.getJobSkills().clear();
+        for (JobSkill jobSkill : job.getJobSkills()) {
+            Skill skill = skillService.findBySkillId(jobSkill.getSkill().getSkillId());
+            jobSkill.setSkill(skill);
+            jobSkill.setJob(updatedJob);
+            updatedJob.getJobSkills().add(jobSkill);
+        }
+        jobService.saveJob(updatedJob);
         return modelAndView;
     }
 
